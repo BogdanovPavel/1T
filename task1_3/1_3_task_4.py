@@ -6,34 +6,31 @@ str_brace = {
 
 str = input()
 
-result_str = ""
+print(str)
+
 
 result = 'false'
 
-i = 1
+# создаем стек и добавляем перевый элемент который будет маркером конца списка
 stack = []
-
-while i < len(str) & len(str) > 1:
-
-    brace = str_brace.get(str[i], '')
-
-    if str[i-1] != brace :
-        stack.append(str[i-1])
-
-        print('apend ', stack)
-
-        if stack[-1] == brace:
+stack.append('.')
+# делаем перебор строки
+for i in str:
+    # делам проверку какая скобка открывающая или закрывающая
+    if i in str_brace:
+        # проверка последней скобки в стке и текущей
+        if stack[-1] == str_brace[i]:
+            # скобки являются парой, первая открыватся вторя закрывающая
             stack.pop()
+        else:
+            # скобки не являются парой
+            stack.append(i)
+    else:
+        # скобка открывающая просто добавляем в стэк
+        stack.append(i)
 
+# делам проверку стека если последний элемент является маркером то все скобки оказались парами
+if stack[-1] == '.':
+    result = 'true'
 
-            print('pop', stack[-1], 'pop1')
-    else :
-        i += 1
-
-
-
-    i += 1
-
-    print('while', result_str)
-
-print(result, stack)
+print(result)
